@@ -1,14 +1,23 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "tb_localization")
 public class Localization implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Double lat;
     private Double lon;
     private String galaxyName;
+
+    @OneToOne
+    private Rebel rebel;
 
     public Localization() {
     }

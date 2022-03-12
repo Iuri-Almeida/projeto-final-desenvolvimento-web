@@ -2,20 +2,30 @@ package br.com.ialmeida.projetofinaldesenvolvimentoweb.entities;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.enums.Gender;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_rebel")
 public class Rebel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer age;
     private Gender gender;
+
+    @OneToOne
+    @JoinColumn(name = "localization_id")
     private Localization localization;
+
+    @Transient
     private final Map<String, Integer> inventory = new HashMap<>();
 
     public Rebel() {
