@@ -1,6 +1,6 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.controllers;
 
-import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.RebelService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +21,12 @@ public class RebelController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Rebel>> findAll() {
+    public ResponseEntity<List<RebelDTO>> findAll() {
         return ResponseEntity.ok().body(rebelService.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Rebel> findById(@PathVariable Long id) {
+    public ResponseEntity<RebelDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(rebelService.findById(id));
     }
 
