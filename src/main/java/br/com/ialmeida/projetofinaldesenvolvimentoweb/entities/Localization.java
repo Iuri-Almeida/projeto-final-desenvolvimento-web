@@ -1,5 +1,7 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -17,6 +19,7 @@ public class Localization implements Serializable {
     private String galaxyName;
 
     @OneToOne(mappedBy = "localization")
+    @JsonIgnore
     private Rebel rebel;
 
     public Localization() {

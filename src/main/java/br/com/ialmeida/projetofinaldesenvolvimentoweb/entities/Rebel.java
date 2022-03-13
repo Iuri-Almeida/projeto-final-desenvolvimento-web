@@ -1,6 +1,7 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.entities;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
