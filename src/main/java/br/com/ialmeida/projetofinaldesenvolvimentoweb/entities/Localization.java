@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_localization")
@@ -25,7 +26,7 @@ public class Localization implements Serializable {
     public Localization() {
     }
 
-    public Localization(Double lat, Double lon, String galaxyName) {
+    public Localization(Long id, Double lat, Double lon, String galaxyName) {
         this.lat = lat;
         this.lon = lon;
         this.galaxyName = galaxyName;
@@ -69,5 +70,18 @@ public class Localization implements Serializable {
 
     public void setRebel(Rebel rebel) {
         this.rebel = rebel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Localization that = (Localization) o;
+        return lat.equals(that.lat) && lon.equals(that.lon) && galaxyName.equals(that.galaxyName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lat, lon, galaxyName);
     }
 }

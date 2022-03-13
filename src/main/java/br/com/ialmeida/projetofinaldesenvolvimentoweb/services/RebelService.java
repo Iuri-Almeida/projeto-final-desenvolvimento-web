@@ -6,7 +6,6 @@ import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.RebelReposito
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class RebelService {
@@ -17,15 +16,20 @@ public class RebelService {
         this.rebelRepository = rebelRepository;
     }
 
-    public List<RebelDTO> findAll() {
-        List<Rebel> rebels = rebelRepository.findAll();
-        List<RebelDTO> rebelDTOS = rebels.stream().map(RebelDTO::new).collect(Collectors.toList());;
-        return rebelDTOS;
+    public List<Rebel> findAll() {
+        return rebelRepository.findAll();
     }
 
-    public RebelDTO findById(Long id) {
-        Rebel rebel = rebelRepository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find rebel with id = " + id));
-        return new RebelDTO(rebel);
+    public Rebel findById(Long id) {
+        return rebelRepository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find rebel with id = " + id));
+    }
+
+    public Rebel insert(Rebel rebel) {
+        return rebelRepository.save(rebel);
+    }
+
+    public Rebel fromRebelDTO(RebelDTO rebelDTO) {
+        return new Rebel(rebelDTO.getId(), rebelDTO.getName(), rebelDTO.getAge(), rebelDTO.getGender(), rebelDTO.getLocalization());
     }
 
 }

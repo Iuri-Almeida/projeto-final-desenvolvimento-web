@@ -26,8 +26,8 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Localization l1 = new Localization(23.5, 89.76, "Via Láctea");
-        Localization l2 = new Localization(25.9, 19.12, "Andrômeda");
+        Localization l1 = new Localization(null, 23.5, 89.76, "Via Láctea");
+        Localization l2 = new Localization(null, 25.9, 19.12, "Andrômeda");
         localizationRepository.saveAll(Arrays.asList(l1, l2));
 
         Rebel r1 = new Rebel(null, "Iuri", 22, Gender.MALE, l2);
