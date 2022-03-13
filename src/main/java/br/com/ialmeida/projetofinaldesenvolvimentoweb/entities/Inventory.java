@@ -46,48 +46,32 @@ public class Inventory implements Serializable {
         return food;
     }
 
-    public void addFood() {
-        this.food++;
-    }
-
-    public void removeFood() {
-        this.food--;
+    public void setFood(Integer food) {
+        this.food = food;
     }
 
     public Integer getWater() {
         return water;
     }
 
-    public void addWater() {
-        this.water++;
-    }
-
-    public void removeWater() {
-        this.water--;
+    public void setWater(Integer water) {
+        this.water = water;
     }
 
     public Integer getAmmunition() {
         return ammunition;
     }
 
-    public void addAmmunition() {
-        this.ammunition++;
-    }
-
-    public void removeAmmunition() {
-        this.ammunition--;
+    public void setAmmunition(Integer ammunition) {
+        this.ammunition = ammunition;
     }
 
     public Integer getGun() {
         return gun;
     }
 
-    public void addGun() {
-        this.gun++;
-    }
-
-    public void removeGun() {
-        this.gun--;
+    public void setGun(Integer gun) {
+        this.gun = gun;
     }
 
     public Rebel getRebel() {
