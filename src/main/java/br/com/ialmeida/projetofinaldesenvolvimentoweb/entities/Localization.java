@@ -16,7 +16,7 @@ public class Localization implements Serializable {
     private Double lon;
     private String galaxyName;
 
-    @OneToOne
+    @OneToOne(mappedBy = "localization")
     private Rebel rebel;
 
     public Localization() {
@@ -26,6 +26,14 @@ public class Localization implements Serializable {
         this.lat = lat;
         this.lon = lon;
         this.galaxyName = galaxyName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Double getLat() {
@@ -50,5 +58,13 @@ public class Localization implements Serializable {
 
     public void setGalaxyName(String galaxyName) {
         this.galaxyName = galaxyName;
+    }
+
+    public Rebel getRebel() {
+        return rebel;
+    }
+
+    public void setRebel(Rebel rebel) {
+        this.rebel = rebel;
     }
 }

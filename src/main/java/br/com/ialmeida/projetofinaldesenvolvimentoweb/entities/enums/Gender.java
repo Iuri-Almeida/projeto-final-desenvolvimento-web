@@ -2,20 +2,20 @@ package br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.enums;
 
 public enum Gender {
 
-    MALE('M'),
-    FEMALE('F');
+    MALE(0),
+    FEMALE(1);
 
-    private final char code;
+    private final int code;
 
-    private Gender(char code) {
+    private Gender(int code) {
         this.code = code;
     }
 
-    public char getCode() {
+    public int getCode() {
         return code;
     }
 
-    public static Gender valueOf(char code) {
+    public static Gender valueOf(int code) {
         for (Gender value : Gender.values()) {
             if (value.getCode() == code) {
                 return value;

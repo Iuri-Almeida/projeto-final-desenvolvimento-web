@@ -22,7 +22,6 @@ public class Rebel implements Serializable {
     private Gender gender;
 
     @OneToOne
-    @JoinColumn(name = "localization_id")
     private Localization localization;
 
     @Transient
