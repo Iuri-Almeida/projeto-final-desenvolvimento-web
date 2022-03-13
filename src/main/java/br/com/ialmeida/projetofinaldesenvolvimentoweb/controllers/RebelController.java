@@ -2,6 +2,7 @@ package br.com.ialmeida.projetofinaldesenvolvimentoweb.controllers;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.InventoryService;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.LocalizationService;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.RebelService;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,12 @@ public class RebelController {
 
     private final RebelService rebelService;
     private final LocalizationService localizationService;
+    private final InventoryService inventoryService;
 
-    public RebelController(RebelService rebelService, LocalizationService localizationService) {
+    public RebelController(RebelService rebelService, LocalizationService localizationService, InventoryService inventoryService) {
         this.rebelService = rebelService;
         this.localizationService = localizationService;
+        this.inventoryService = inventoryService;
     }
 
     @GetMapping
@@ -40,6 +43,7 @@ public class RebelController {
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody RebelDTO rebelDTO) {
         localizationService.insert(rebelDTO.getLocalization());
+        inventoryService.insert(rebelDTO.getInventory());
 
         Rebel rebel = rebelService.fromRebelDTO(rebelDTO);
         rebel = rebelService.insert(rebel);
