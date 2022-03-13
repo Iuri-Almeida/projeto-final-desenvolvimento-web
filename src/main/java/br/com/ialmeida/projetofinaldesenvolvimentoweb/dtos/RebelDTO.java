@@ -1,12 +1,11 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos;
 
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Localization;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.enums.Gender;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class RebelDTO implements Serializable {
 
@@ -17,7 +16,7 @@ public class RebelDTO implements Serializable {
     private Integer age;
     private Gender gender;
     private Localization localization;
-    private Map<String, Integer> inventory = new HashMap<>();
+    private Inventory inventory;
 
     public RebelDTO() {
     }
@@ -71,8 +70,11 @@ public class RebelDTO implements Serializable {
         this.localization = localization;
     }
 
-    public Map<String, Integer> getInventory() {
+    public Inventory getInventory() {
         return inventory;
     }
 
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 }

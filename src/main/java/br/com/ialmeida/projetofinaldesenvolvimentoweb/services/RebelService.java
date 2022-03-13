@@ -29,7 +29,7 @@ public class RebelService {
     }
 
     public Rebel fromRebelDTO(RebelDTO rebelDTO) {
-        return new Rebel(rebelDTO.getId(), rebelDTO.getName(), rebelDTO.getAge(), rebelDTO.getGender(), rebelDTO.getLocalization());
+        return new Rebel(rebelDTO.getId(), rebelDTO.getName(), rebelDTO.getAge(), rebelDTO.getGender(), rebelDTO.getLocalization(), rebelDTO.getInventory());
     }
 
 }

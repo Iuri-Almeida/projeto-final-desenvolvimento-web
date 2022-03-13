@@ -1,12 +1,9 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.entities;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.enums.Gender;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 @Entity
@@ -25,23 +22,19 @@ public class Rebel implements Serializable {
     @OneToOne
     private Localization localization;
 
-    @Transient
-    private final Map<String, Integer> inventory = new HashMap<>();
+    @OneToOne
+    private Inventory inventory;
 
     public Rebel() {
     }
 
-    public Rebel(Long id, String name, Integer age, Gender gender, Localization localization) {
+    public Rebel(Long id, String name, Integer age, Gender gender, Localization localization, Inventory inventory) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.localization = localization;
-
-        this.inventory.put("FOOD", 0);
-        this.inventory.put("WATER", 0);
-        this.inventory.put("AMMUNITION", 0);
-        this.inventory.put("GUN", 0);
+        this.inventory = inventory;
     }
 
     public Long getId() {
@@ -84,8 +77,12 @@ public class Rebel implements Serializable {
         this.localization = localization;
     }
 
-    public Map<String, Integer> getInventory() {
+    public Inventory getInventory() {
         return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     @Override
