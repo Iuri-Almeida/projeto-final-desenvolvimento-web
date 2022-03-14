@@ -3,19 +3,23 @@ package br.com.ialmeida.projetofinaldesenvolvimentoweb.services;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.InventoryRepository;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.RebelRepository;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.utils.TradeConstants;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class RebelService {
 
     private final RebelRepository rebelRepository;
+    private final InventoryRepository inventoryRepository;
 
-    public RebelService(RebelRepository rebelRepository) {
+    public RebelService(RebelRepository rebelRepository, InventoryRepository inventoryRepository) {
         this.rebelRepository = rebelRepository;
+        this.inventoryRepository = inventoryRepository;
     }
 
     public List<Rebel> findAll() {
@@ -78,6 +82,10 @@ public class RebelService {
         validateScore(items1, items2);
 
         // confirm trade
+        trade(rebel1, items1, items2);
+        trade(rebel2, items2, items1);
+
+        rebelRepository.saveAll(Arrays.asList(rebel1, rebel2));
     }
 
     private void validateTrade(Rebel rebel1, Rebel rebel2) {
@@ -122,6 +130,41 @@ public class RebelService {
         score += (inventory.getGun() == null) ? 0 : inventory.getGun() * TradeConstants.GUN_SCORE;
 
         return score;
+    }
+
+    private void trade(Rebel rebel, Inventory myItems, Inventory otherItems) {
+        removeItems(rebel, myItems);
+        addNewItems(rebel, otherItems);
+    }
+
+    private void removeItems(Rebel rebel, Inventory inventory) {
+        if (inventory.getFood() != null) {
+            rebel.getInventory().setFood(rebel.getInventory().getFood() - inventory.getFood());
+        }
+        if (inventory.getWater() != null) {
+            rebel.getInventory().setWater(rebel.getInventory().getWater() - inventory.getWater());
+        }
+        if (inventory.getAmmunition() != null) {
+            rebel.getInventory().setAmmunition(rebel.getInventory().getAmmunition() - inventory.getAmmunition());
+        }
+        if (inventory.getGun() != null) {
+            rebel.getInventory().setGun(rebel.getInventory().getGun() - inventory.getGun());
+        }
+    }
+
+    private void addNewItems(Rebel rebel, Inventory inventory) {
+        if (inventory.getFood() != null) {
+            rebel.getInventory().setFood(rebel.getInventory().getFood() + inventory.getFood());
+        }
+        if (inventory.getWater() != null) {
+            rebel.getInventory().setWater(rebel.getInventory().getWater() + inventory.getWater());
+        }
+        if (inventory.getAmmunition() != null) {
+            rebel.getInventory().setAmmunition(rebel.getInventory().getAmmunition() + inventory.getAmmunition());
+        }
+        if (inventory.getGun() != null) {
+            rebel.getInventory().setGun(rebel.getInventory().getGun() + inventory.getGun());
+        }
     }
 
     public Rebel fromRebelDTO(RebelDTO rebelDTO) {
