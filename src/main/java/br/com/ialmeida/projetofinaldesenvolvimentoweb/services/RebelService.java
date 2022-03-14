@@ -4,6 +4,7 @@ import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.RebelRepository;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.exceptions.RebelNotFoundException;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.utils.TradeConstants;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class RebelService {
     }
 
     public Rebel findById(Long id) {
-        return rebelRepository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find rebel with id = " + id));
+        return rebelRepository.findById(id).orElseThrow(() -> new RebelNotFoundException(id));
     }
 
     public Rebel insert(Rebel rebel) {
