@@ -38,6 +38,17 @@ public class RebelService {
         return rebelRepository.save(entity);
     }
 
+    public void reportRebel(Long id) {
+        Rebel reportedRebel = findById(id);
+        reportedRebel.addReports();
+
+        if (reportedRebel.getReports() >= 3) {
+            reportedRebel.setTraitor(true);
+        }
+
+        rebelRepository.save(reportedRebel);
+    }
+
     public Rebel fromRebelDTO(RebelDTO rebelDTO) {
         return new Rebel(rebelDTO.getId(), rebelDTO.getName(), rebelDTO.getAge(), rebelDTO.getGender(), rebelDTO.getLocalization(), rebelDTO.getInventory());
     }

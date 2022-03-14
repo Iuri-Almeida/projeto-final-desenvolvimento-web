@@ -15,6 +15,8 @@ public class RebelDTO implements Serializable {
     private String name;
     private Integer age;
     private Gender gender;
+    private Boolean isTraitor;
+    private Integer reports;
     private Localization localization;
     private Inventory inventory;
 
@@ -26,6 +28,8 @@ public class RebelDTO implements Serializable {
         name = rebel.getName();
         age = rebel.getAge();
         gender = rebel.getGender();
+        isTraitor = rebel.isTraitor();
+        reports = rebel.getReports();
         localization = rebel.getLocalization();
         inventory = rebel.getInventory();
     }
@@ -60,6 +64,22 @@ public class RebelDTO implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Boolean isTraitor() {
+        return isTraitor;
+    }
+
+    public void setTraitor(Boolean isTraitor) {
+        this.isTraitor = isTraitor;
+    }
+
+    public Integer getReports() {
+        return reports;
+    }
+
+    public void addReports() {
+        reports++;
     }
 
     public Localization getLocalization() {

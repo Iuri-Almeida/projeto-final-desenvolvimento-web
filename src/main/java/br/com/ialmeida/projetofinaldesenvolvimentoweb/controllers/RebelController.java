@@ -53,4 +53,10 @@ public class RebelController {
         return ResponseEntity.created(uri).build();
     }
 
+    @GetMapping(value = "/reportTraitor/{id}")
+    public ResponseEntity<RebelDTO> report(@PathVariable Long id) {
+        rebelService.reportRebel(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
