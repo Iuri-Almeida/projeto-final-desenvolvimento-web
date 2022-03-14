@@ -6,6 +6,7 @@ import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.InventoryService;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.LocalizationService;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.RebelService;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.exceptions.StarWarsException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -68,7 +69,7 @@ public class RebelController {
             @RequestParam(value = "toRebel", defaultValue = "") Long toRebelId,
             @RequestBody List<Inventory> items) {
         if (items.size() < 2) {
-            throw new RuntimeException("You must indicate two inventories to complete the trade.");
+            throw new StarWarsException("You must indicate two inventories to complete the trade.");
         }
         rebelService.tradeItems(fromRebelId, items.get(0), toRebelId, items.get(1));
         return ResponseEntity.noContent().build();

@@ -4,6 +4,7 @@ import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.RebelRepository;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.exceptions.StarWarsException;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.exceptions.RebelNotFoundException;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.utils.TradeConstants;
 import org.springframework.stereotype.Service;
@@ -44,14 +45,14 @@ public class RebelService {
 
     public void reportRebel(Long fromRebelId, Long toRebelId) {
         if (fromRebelId.equals(toRebelId)) {
-            throw new RuntimeException("A rebel cannot report himself.");
+            throw new StarWarsException("A rebel cannot report himself.");
         }
 
         Rebel fromRebel = findById(fromRebelId);
         Rebel toRebel = findById(toRebelId);
 
         if (fromRebel.getReportedRebels().contains(toRebel)) {
-            throw new RuntimeException("This rebel has already reported the other one.");
+            throw new StarWarsException("This rebel has already reported the other one.");
         }
 
         fromRebel.getReportedRebels().add(toRebel);
@@ -88,25 +89,25 @@ public class RebelService {
 
     private void validateTrade(Rebel rebel1, Rebel rebel2) {
         if (rebel1.equals(rebel2)) {
-            throw new RuntimeException("A rebel cannot trade with himself.");
+            throw new StarWarsException("A rebel cannot trade with himself.");
         }
 
         if (rebel1.isTraitor() || rebel2.isTraitor()) {
-            throw new RuntimeException("Cannot have dealings with traitors.");
+            throw new StarWarsException("Cannot have dealings with traitors.");
         }
     }
 
     private void validateInventory(Rebel rebel, Inventory items) {
         if (items.getFood() == null && items.getWater() == null && items.getAmmunition() == null && items.getGun() == null) {
-            throw new RuntimeException("You must indicate at least one item from " + rebel.getName() + "'s inventory.");
+            throw new StarWarsException("You must indicate at least one item from " + rebel.getName() + "'s inventory.");
         } else if (items.getFood() != null && rebel.getInventory().getFood() < items.getFood()) {
-            throw new RuntimeException("To negotiate " + rebel.getName() + "'s FOOD you need to have the minimum necessary.");
+            throw new StarWarsException("To negotiate " + rebel.getName() + "'s FOOD you need to have the minimum necessary.");
         } else if (items.getWater() != null && rebel.getInventory().getWater() < items.getWater()) {
-            throw new RuntimeException("To negotiate " + rebel.getName() + "'s WATER you need to have the minimum necessary.");
+            throw new StarWarsException("To negotiate " + rebel.getName() + "'s WATER you need to have the minimum necessary.");
         } else if (items.getAmmunition() != null && rebel.getInventory().getAmmunition() < items.getAmmunition()) {
-            throw new RuntimeException("To negotiate " + rebel.getName() + "'s AMMUNITION you need to have the minimum necessary.");
+            throw new StarWarsException("To negotiate " + rebel.getName() + "'s AMMUNITION you need to have the minimum necessary.");
         } else if (items.getGun() != null && rebel.getInventory().getGun() < items.getGun()) {
-            throw new RuntimeException("To negotiate " + rebel.getName() + "'s GUN you need to have the minimum necessary.");
+            throw new StarWarsException("To negotiate " + rebel.getName() + "'s GUN you need to have the minimum necessary.");
         }
     }
 
@@ -115,7 +116,7 @@ public class RebelService {
         int score2 = getScore(items2);
 
         if (score1 != score2) {
-            throw new RuntimeException("Both side must offer the same amount of points.");
+            throw new StarWarsException("Both side must offer the same amount of points.");
         }
     }
 
