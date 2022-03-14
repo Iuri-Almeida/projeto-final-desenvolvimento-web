@@ -86,7 +86,7 @@ public class RebelService {
         }
 
         if (rebel1.isTraitor() || rebel2.isTraitor()) {
-            throw new RuntimeException("Cannot have dealings with traitors");
+            throw new RuntimeException("Cannot have dealings with traitors.");
         }
     }
 
