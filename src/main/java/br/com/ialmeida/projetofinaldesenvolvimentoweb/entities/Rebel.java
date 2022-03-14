@@ -4,7 +4,9 @@ import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.enums.Gender;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_rebel")
@@ -26,6 +28,9 @@ public class Rebel implements Serializable {
 
     @OneToOne
     private Inventory inventory;
+
+    @Transient
+    private final Set<Rebel> reportedRebels = new HashSet<>();
 
     public Rebel() {
     }
@@ -103,6 +108,10 @@ public class Rebel implements Serializable {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public Set<Rebel> getReportedRebels() {
+        return reportedRebels;
     }
 
     @Override
