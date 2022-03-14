@@ -1,8 +1,10 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.services;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.RebelRepository;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.utils.TradeConstants;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,6 +62,66 @@ public class RebelService {
         }
 
         rebelRepository.save(toRebel);
+    }
+
+    public void tradeItems(Long rebelId1, Inventory items1, Long rebelId2, Inventory items2) {
+        Rebel rebel1 = findById(rebelId1);
+        Rebel rebel2 = findById(rebelId2);
+
+        validateTrade(rebel1, rebel2);
+
+        // validate inventory
+        validateInventory(rebel1, items1);
+        validateInventory(rebel2, items2);
+
+        // validate score
+        validateScore(items1, items2);
+
+        // confirm trade
+    }
+
+    private void validateTrade(Rebel rebel1, Rebel rebel2) {
+        if (rebel1.equals(rebel2)) {
+            throw new RuntimeException("A rebel cannot trade with himself.");
+        }
+
+        if (rebel1.isTraitor() || rebel2.isTraitor()) {
+            throw new RuntimeException("Cannot have dealings with traitors");
+        }
+    }
+
+    private void validateInventory(Rebel rebel, Inventory items) {
+        if (items.getFood() == null && items.getWater() == null && items.getAmmunition() == null && items.getGun() == null) {
+            throw new RuntimeException("You must indicate at least one item from " + rebel.getName() + "'s inventory.");
+        } else if (items.getFood() != null && rebel.getInventory().getFood() < items.getFood()) {
+            throw new RuntimeException("To negotiate " + rebel.getName() + "'s FOOD you need to have the minimum necessary.");
+        } else if (items.getWater() != null && rebel.getInventory().getWater() < items.getWater()) {
+            throw new RuntimeException("To negotiate " + rebel.getName() + "'s WATER you need to have the minimum necessary.");
+        } else if (items.getAmmunition() != null && rebel.getInventory().getAmmunition() < items.getAmmunition()) {
+            throw new RuntimeException("To negotiate " + rebel.getName() + "'s AMMUNITION you need to have the minimum necessary.");
+        } else if (items.getGun() != null && rebel.getInventory().getGun() < items.getGun()) {
+            throw new RuntimeException("To negotiate " + rebel.getName() + "'s GUN you need to have the minimum necessary.");
+        }
+    }
+
+    private void validateScore(Inventory items1, Inventory items2) {
+        int score1 = getScore(items1);
+        int score2 = getScore(items2);
+
+        if (score1 != score2) {
+            throw new RuntimeException("Both side must offer the same amount of points.");
+        }
+    }
+
+    private int getScore(Inventory inventory) {
+        int score = 0;
+
+        score += (inventory.getFood() == null) ? 0 : inventory.getFood() * TradeConstants.FOOD_SCORE;
+        score += (inventory.getWater() == null) ? 0 : inventory.getWater() * TradeConstants.WATER_SCORE;
+        score += (inventory.getAmmunition() == null) ? 0 : inventory.getAmmunition() * TradeConstants.AMMUNITION_SCORE;
+        score += (inventory.getGun() == null) ? 0 : inventory.getGun() * TradeConstants.GUN_SCORE;
+
+        return score;
     }
 
     public Rebel fromRebelDTO(RebelDTO rebelDTO) {

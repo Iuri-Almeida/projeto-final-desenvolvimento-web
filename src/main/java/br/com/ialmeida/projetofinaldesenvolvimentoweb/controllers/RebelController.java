@@ -1,6 +1,7 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.controllers;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.InventoryService;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.LocalizationService;
@@ -54,10 +55,22 @@ public class RebelController {
     }
 
     @GetMapping(value = "/reportTraitor")
-    public ResponseEntity<RebelDTO> report(
+    public ResponseEntity<Void> report(
             @RequestParam(value = "fromRebel", defaultValue = "") Long fromRebelId,
             @RequestParam(value = "toRebel", defaultValue = "") Long toRebelId) {
         rebelService.reportRebel(fromRebelId, toRebelId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/tradeItems")
+    public ResponseEntity<Void> trade(
+            @RequestParam(value = "fromRebel", defaultValue = "") Long fromRebelId,
+            @RequestParam(value = "toRebel", defaultValue = "") Long toRebelId,
+            @RequestBody List<Inventory> items) {
+        if (items.size() < 2) {
+            throw new RuntimeException("You must indicate two inventories to complete the trade.");
+        }
+        rebelService.tradeItems(fromRebelId, items.get(0), toRebelId, items.get(1));
         return ResponseEntity.noContent().build();
     }
 
