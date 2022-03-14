@@ -29,7 +29,7 @@ public class Rebel implements Serializable {
     @OneToOne
     private Inventory inventory;
 
-    @Transient
+    @OneToMany
     private final Set<Rebel> reportedRebels = new HashSet<>();
 
     public Rebel() {

@@ -38,19 +38,20 @@ public class RebelService {
         return rebelRepository.save(entity);
     }
 
-    public void reportRebel(Long nameFromRebel, Long nameToRebel) {
-        if (nameFromRebel.equals(nameToRebel)) {
+    public void reportRebel(Long fromRebelId, Long toRebelId) {
+        if (fromRebelId.equals(toRebelId)) {
             throw new RuntimeException("A rebel cannot report himself.");
         }
 
-        Rebel fromRebel = findById(nameFromRebel);
-        Rebel toRebel = findById(nameToRebel);
+        Rebel fromRebel = findById(fromRebelId);
+        Rebel toRebel = findById(toRebelId);
 
         if (fromRebel.getReportedRebels().contains(toRebel)) {
             throw new RuntimeException("This rebel has already reported the other one.");
         }
 
         fromRebel.getReportedRebels().add(toRebel);
+        rebelRepository.save(fromRebel);
 
         toRebel.addReports();
 
