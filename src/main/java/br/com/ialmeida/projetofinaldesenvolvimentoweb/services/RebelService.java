@@ -3,7 +3,6 @@ package br.com.ialmeida.projetofinaldesenvolvimentoweb.services;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
-import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.InventoryRepository;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.RebelRepository;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.utils.TradeConstants;
 import org.springframework.stereotype.Service;
@@ -15,11 +14,9 @@ import java.util.List;
 public class RebelService {
 
     private final RebelRepository rebelRepository;
-    private final InventoryRepository inventoryRepository;
 
-    public RebelService(RebelRepository rebelRepository, InventoryRepository inventoryRepository) {
+    public RebelService(RebelRepository rebelRepository) {
         this.rebelRepository = rebelRepository;
-        this.inventoryRepository = inventoryRepository;
     }
 
     public List<Rebel> findAll() {
