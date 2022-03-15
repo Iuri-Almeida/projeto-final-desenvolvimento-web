@@ -116,33 +116,33 @@ $ git clone https://github.com/Iuri-Almeida/projeto-final-desenvolvimento-web.gi
 
 * **[POST]** Insert rebel - http://localhost:8080/api/rebels
 ```json
-  // Rebel object
-  {
-      "name": "Letícia",
-      "age": 56,
-      "gender": "FEMALE",
-      "localization": {
-          "lat": 45.76,
-          "lon": 81.98,
-          "galaxyName": "Via Láctea"
-      },
-      "inventory": {
-          "food": 1,
-          "water": 3,
-          "ammunition": 6,
-          "gun": 3
-      }
-  }
+// Rebel object
+{
+    "name": "Letícia",
+    "age": 56,
+    "gender": "FEMALE",
+    "localization": {
+        "lat": 45.76,
+        "lon": 81.98,
+        "galaxyName": "Via Láctea"
+    },
+    "inventory": {
+        "food": 1,
+        "water": 3,
+        "ammunition": 6,
+        "gun": 3
+    }
+}
 ```
 
 * **[PUT]** Update rebel localization - http://localhost:8080/api/localization/<id>
 ```json
-  // Localization object
-  {
-    "lat": 67.98,
-    "lon": 102.23,
-    "galaxyName": "Via Láctea"
-  }
+// Localization object
+{
+  "lat": 67.98,
+  "lon": 102.23,
+  "galaxyName": "Via Láctea"
+}
 ```
 
 * **[GET]** Report rebel - http://localhost:8080/api/rebels/reportTraitor?fromRebel=<from_id>&toRebel=<to_id>
@@ -150,23 +150,23 @@ $ git clone https://github.com/Iuri-Almeida/projeto-final-desenvolvimento-web.gi
 
 * **[GET]** Trade items - http://localhost:8080/api/rebels/tradeItems?fromRebel=<from_id>&toRebel=<to_id>
 ```json
-  // List of Inventory object
-  [
-    // Inventory object related to <from_id>
-    {
-      "food": 1,
-      "water": 3,
-      "ammunition": 6,
-      "gun": 3
-    },
-    // Inventory object related to <to_id>
-    {
-      "food": 1,
-      "water": 3,
-      "ammunition": 6,
-      "gun": 3
-    }
-  ]
+// List of Inventory object
+[
+  // Inventory object related to <from_id>
+  {
+    "food": 1,
+    "water": 3,
+    "ammunition": 6,
+    "gun": 3
+  },
+  // Inventory object related to <to_id>
+  {
+    "food": 1,
+    "water": 3,
+    "ammunition": 6,
+    "gun": 3
+  }
+]
 ```
 
 * **[GET]** API report - http://localhost:8080/api/report
