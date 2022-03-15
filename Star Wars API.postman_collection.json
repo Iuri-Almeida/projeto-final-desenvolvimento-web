@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "ba7f17c6-5aa3-46d8-84f4-dcf4ead50f89",
+		"name": "Star Wars API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get rebels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rebels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rebels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get rebel by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rebels/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rebels",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert rebel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Letícia\",\n    \"age\": 56,\n    \"gender\": \"FEMALE\",\n    \"localization\": {\n        \"lat\": 45.76,\n        \"lon\": 81.98,\n        \"galaxyName\": \"Via Láctea\"\n    },\n    \"inventory\": {\n        \"food\": 1,\n        \"water\": 3,\n        \"ammunition\": 6,\n        \"gun\": 3\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rebels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rebels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update rebel localization",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lat\": 67.98,\n    \"lon\": 102.23,\n    \"galaxyName\": \"Via Láctea\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/localization/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"localization",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report rebel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rebels/reportTraitor?fromRebel=1&toRebel=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rebels",
+						"reportTraitor"
+					],
+					"query": [
+						{
+							"key": "fromRebel",
+							"value": "1"
+						},
+						{
+							"key": "toRebel",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trade items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"gun\": 1\n    },\n    {\n        \"ammunition\": 1,\n        \"food\": 1\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rebels/tradeItems?fromRebel=1&toRebel=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rebels",
+						"tradeItems"
+					],
+					"query": [
+						{
+							"key": "fromRebel",
+							"value": "1"
+						},
+						{
+							"key": "toRebel",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
