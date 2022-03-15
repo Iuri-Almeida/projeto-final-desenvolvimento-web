@@ -13,8 +13,8 @@ public class LocalizationService {
         this.localizationRepository = localizationRepository;
     }
 
-    public void insert(Localization localization) {
-        localizationRepository.save(localization);
+    public Localization insert(Localization localization) {
+        return localizationRepository.save(localization);
     }
 
 }

@@ -13,8 +13,8 @@ public class InventoryService {
         this.inventoryRepository = inventoryRepository;
     }
 
-    public void insert(Inventory inventory) {
-        inventoryRepository.save(inventory);
+    public Inventory insert(Inventory inventory) {
+        return inventoryRepository.save(inventory);
     }
 
 }
