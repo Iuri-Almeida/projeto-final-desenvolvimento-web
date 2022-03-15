@@ -132,37 +132,22 @@ public class RebelService {
     }
 
     private void trade(Rebel rebel, Inventory myItems, Inventory otherItems) {
-        removeItems(rebel, myItems);
-        addNewItems(rebel, otherItems);
+        setItems(rebel, myItems, true);
+        setItems(rebel, otherItems, false);
     }
 
-    private void removeItems(Rebel rebel, Inventory inventory) {
+    private void setItems(Rebel rebel, Inventory inventory, boolean isRemoving) {
         if (inventory.getFood() != null) {
-            rebel.getInventory().setFood(rebel.getInventory().getFood() - inventory.getFood());
+            rebel.getInventory().setFood(rebel.getInventory().getFood() + (isRemoving ? - inventory.getFood() : inventory.getFood()));
         }
         if (inventory.getWater() != null) {
-            rebel.getInventory().setWater(rebel.getInventory().getWater() - inventory.getWater());
+            rebel.getInventory().setWater(rebel.getInventory().getWater() + (isRemoving ? - inventory.getWater() : inventory.getWater()));
         }
         if (inventory.getAmmunition() != null) {
-            rebel.getInventory().setAmmunition(rebel.getInventory().getAmmunition() - inventory.getAmmunition());
+            rebel.getInventory().setAmmunition(rebel.getInventory().getAmmunition() + (isRemoving ? - inventory.getAmmunition() : inventory.getAmmunition()));
         }
         if (inventory.getGun() != null) {
-            rebel.getInventory().setGun(rebel.getInventory().getGun() - inventory.getGun());
-        }
-    }
-
-    private void addNewItems(Rebel rebel, Inventory inventory) {
-        if (inventory.getFood() != null) {
-            rebel.getInventory().setFood(rebel.getInventory().getFood() + inventory.getFood());
-        }
-        if (inventory.getWater() != null) {
-            rebel.getInventory().setWater(rebel.getInventory().getWater() + inventory.getWater());
-        }
-        if (inventory.getAmmunition() != null) {
-            rebel.getInventory().setAmmunition(rebel.getInventory().getAmmunition() + inventory.getAmmunition());
-        }
-        if (inventory.getGun() != null) {
-            rebel.getInventory().setGun(rebel.getInventory().getGun() + inventory.getGun());
+            rebel.getInventory().setGun(rebel.getInventory().getGun() + (isRemoving ? - inventory.getGun() : inventory.getGun()));
         }
     }
 
