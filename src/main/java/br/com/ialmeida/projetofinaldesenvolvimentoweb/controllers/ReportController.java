@@ -1,7 +1,6 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.controllers;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.RebelService;
-import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.ReportService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,15 +12,15 @@ import java.util.HashMap;
 @RequestMapping(value = "/api/report")
 public class ReportController {
 
-    private final ReportService reportService;
+    private final RebelService rebelService;
 
-    public ReportController(RebelService rebelService, ReportService reportService) {
-        this.reportService = reportService;
+    public ReportController(RebelService rebelService) {
+        this.rebelService = rebelService;
     }
 
     @GetMapping
     public ResponseEntity<HashMap<String, Object>> report() {
-        HashMap<String, Object> obj = reportService.report();
+        HashMap<String, Object> obj = rebelService.apiReport();
         return ResponseEntity.ok().body(obj);
     }
 
