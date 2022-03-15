@@ -77,11 +77,9 @@ class RebelServiceTest {
     @DisplayName("Update rebel localization when successful")
     void updateRebelLocalization() {
         Rebel rebel1 = insertRebel();
-        Rebel rebel2 = insertRebel();
+        Localization localization = createLocalization(98.76, 54.32, "Via Láctea");
 
-        rebel2.setLocalization(createLocalization(98.76, 54.32, "Via Láctea"));
-
-        Rebel rebelModified = rebelService.updateRebelLocalization(rebel1.getId(), rebel2);
+        Rebel rebelModified = rebelService.updateRebelLocalization(rebel1.getId(), localization);
 
         Assertions.assertThat(rebelModified).isNotNull();
         Assertions.assertThat(rebelModified.getId()).isNotNull();

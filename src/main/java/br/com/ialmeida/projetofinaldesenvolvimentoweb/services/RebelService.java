@@ -2,6 +2,7 @@ package br.com.ialmeida.projetofinaldesenvolvimentoweb.services;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Localization;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.RebelRepository;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.exceptions.StarWarsException;
@@ -34,12 +35,12 @@ public class RebelService {
         return rebelRepository.save(rebel);
     }
 
-    public Rebel updateRebelLocalization(Long id, Rebel obj) {
+    public Rebel updateRebelLocalization(Long id, Localization obj) {
         Rebel entity = findById(id);
 
-        entity.getLocalization().setLat(obj.getLocalization().getLat());
-        entity.getLocalization().setLon(obj.getLocalization().getLon());
-        entity.getLocalization().setGalaxyName(obj.getLocalization().getGalaxyName());
+        entity.getLocalization().setLat(obj.getLat());
+        entity.getLocalization().setLon(obj.getLon());
+        entity.getLocalization().setGalaxyName(obj.getGalaxyName());
 
         return rebelRepository.save(entity);
     }
