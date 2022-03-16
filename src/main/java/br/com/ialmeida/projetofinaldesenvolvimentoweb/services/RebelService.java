@@ -7,7 +7,7 @@ import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.RebelRepository;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.exceptions.StarWarsException;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.exceptions.RebelNotFoundException;
-import br.com.ialmeida.projetofinaldesenvolvimentoweb.utils.TradeConstants;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.utils.ApiUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -28,10 +28,17 @@ public class RebelService {
     }
 
     public Rebel findById(Long id) {
-        return rebelRepository.findById(id).orElseThrow(() -> new RebelNotFoundException(id));
+        return rebelRepository.findById(id).orElseThrow(() -> new RebelNotFoundException("Rebel not found. Id = " + id));
+    }
+
+    public Rebel findByName(String name) {
+        name = ApiUtil.decodeParam(name);
+        String finalName = name;
+        return rebelRepository.findByNameContainingIgnoreCase(name).orElseThrow(() -> new RebelNotFoundException("Rebel not found. Name = " + finalName));
     }
 
     public Rebel insert(Rebel rebel) {
+        rebel.setName(ApiUtil.stripAccents(rebel.getName()));
         return rebelRepository.save(rebel);
     }
 
@@ -70,10 +77,10 @@ public class RebelService {
         for (Rebel rebel : rebelList) {
             if (rebel.isTraitor()) {
                 traitors++;
-                pointsLostByTraitors += (rebel.getInventory().getFood() * TradeConstants.FOOD_SCORE) +
-                        (rebel.getInventory().getWater() * TradeConstants.WATER_SCORE) +
-                        (rebel.getInventory().getAmmunition() * TradeConstants.AMMUNITION_SCORE) +
-                        (rebel.getInventory().getGun() * TradeConstants.GUN_SCORE);
+                pointsLostByTraitors += (rebel.getInventory().getFood() * ApiUtil.FOOD_SCORE) +
+                        (rebel.getInventory().getWater() * ApiUtil.WATER_SCORE) +
+                        (rebel.getInventory().getAmmunition() * ApiUtil.AMMUNITION_SCORE) +
+                        (rebel.getInventory().getGun() * ApiUtil.GUN_SCORE);
             } else {
                 rebels++;
                 food += rebel.getInventory().getFood();
@@ -107,13 +114,18 @@ public class RebelService {
         return obj;
     }
 
-    public void reportRebel(Long fromRebelId, Long toRebelId) {
-        if (fromRebelId.equals(toRebelId)) {
+    public void reportRebelByName(String rebelName1, String rebelName2) {
+        reportRebel(findByName(rebelName1), findByName(rebelName2));
+    }
+
+    public void reportRebelById(Long rebelId1, Long rebelId2) {
+        reportRebel(findById(rebelId1), findById(rebelId2));
+    }
+
+    private void reportRebel(Rebel fromRebel, Rebel toRebel) {
+        if (fromRebel.equals(toRebel)) {
             throw new StarWarsException("A rebel cannot report himself.");
         }
-
-        Rebel fromRebel = findById(fromRebelId);
-        Rebel toRebel = findById(toRebelId);
 
         if (fromRebel.getReportedRebels().contains(toRebel)) {
             throw new StarWarsException("This rebel has already reported the other one.");
@@ -187,10 +199,10 @@ public class RebelService {
     private int getScore(Inventory inventory) {
         int score = 0;
 
-        score += (inventory.getFood() == null) ? 0 : inventory.getFood() * TradeConstants.FOOD_SCORE;
-        score += (inventory.getWater() == null) ? 0 : inventory.getWater() * TradeConstants.WATER_SCORE;
-        score += (inventory.getAmmunition() == null) ? 0 : inventory.getAmmunition() * TradeConstants.AMMUNITION_SCORE;
-        score += (inventory.getGun() == null) ? 0 : inventory.getGun() * TradeConstants.GUN_SCORE;
+        score += (inventory.getFood() == null) ? 0 : inventory.getFood() * ApiUtil.FOOD_SCORE;
+        score += (inventory.getWater() == null) ? 0 : inventory.getWater() * ApiUtil.WATER_SCORE;
+        score += (inventory.getAmmunition() == null) ? 0 : inventory.getAmmunition() * ApiUtil.AMMUNITION_SCORE;
+        score += (inventory.getGun() == null) ? 0 : inventory.getGun() * ApiUtil.GUN_SCORE;
 
         return score;
     }

@@ -55,11 +55,19 @@ public class RebelController {
         return ResponseEntity.created(uri).build();
     }
 
-    @GetMapping(value = "/reportTraitor")
+    @GetMapping(value = "/reportTraitorById")
     public ResponseEntity<Void> report(
-            @RequestParam(value = "fromRebel", defaultValue = "") Long fromRebelId,
-            @RequestParam(value = "toRebel", defaultValue = "") Long toRebelId) {
-        rebelService.reportRebel(fromRebelId, toRebelId);
+            @RequestParam(value = "fromRebel", defaultValue = "") Long rebelId1,
+            @RequestParam(value = "toRebel", defaultValue = "") Long rebelId2) {
+        rebelService.reportRebelById(rebelId1, rebelId2);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/reportTraitorByName")
+    public ResponseEntity<Void> report(
+            @RequestParam(value = "fromRebel", defaultValue = "") String rebelName1,
+            @RequestParam(value = "toRebel", defaultValue = "") String rebelName2) {
+        rebelService.reportRebelByName(rebelName1, rebelName2);
         return ResponseEntity.noContent().build();
     }
 
