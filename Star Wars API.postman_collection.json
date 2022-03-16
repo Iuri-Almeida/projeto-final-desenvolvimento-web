@@ -53,7 +53,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Letícia\",\n    \"age\": 56,\n    \"gender\": \"FEMALE\",\n    \"localization\": {\n        \"lat\": 45.76,\n        \"lon\": 81.98,\n        \"galaxyName\": \"Via Láctea\"\n    },\n    \"inventory\": {\n        \"food\": 1,\n        \"water\": 3,\n        \"ammunition\": 6,\n        \"gun\": 3\n    }\n}",
+					"raw": "{\n    \"name\": \"Fábio\",\n    \"age\": 56,\n    \"gender\": \"MALE\",\n    \"localization\": {\n        \"lat\": 45.76,\n        \"lon\": 81.98,\n        \"galaxyName\": \"Via Láctea\"\n    },\n    \"inventory\": {\n        \"food\": 1,\n        \"water\": 3,\n        \"ammunition\": 6,\n        \"gun\": 3\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -82,7 +82,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"lat\": 67.98,\n    \"lon\": 102.23,\n    \"galaxyName\": \"Via Láctea\"\n}",
+					"raw": "{\n    \"lat\": 67.98,\n    \"lon\": 102.23\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -106,12 +106,12 @@
 			"response": []
 		},
 		{
-			"name": "Report rebel",
+			"name": "Report rebel by id",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/rebels/reportTraitor?fromRebel=1&toRebel=3",
+					"raw": "http://localhost:8080/api/rebels/reportTraitorById?fromRebel=2&toRebel=3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -120,12 +120,12 @@
 					"path": [
 						"api",
 						"rebels",
-						"reportTraitor"
+						"reportTraitorById"
 					],
 					"query": [
 						{
 							"key": "fromRebel",
-							"value": "1"
+							"value": "2"
 						},
 						{
 							"key": "toRebel",
@@ -137,24 +137,12 @@
 			"response": []
 		},
 		{
-			"name": "Trade items",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Report rebel by name",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n    {\n        \"gun\": 1\n    },\n    {\n        \"ammunition\": 1,\n        \"food\": 1\n    }\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:8080/api/rebels/tradeItems?fromRebel=1&toRebel=3",
+					"raw": "http://localhost:8080/api/rebels/reportTraitorByName?fromRebel=fabio&toRebel=iuri",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -163,7 +151,50 @@
 					"path": [
 						"api",
 						"rebels",
-						"tradeItems"
+						"reportTraitorByName"
+					],
+					"query": [
+						{
+							"key": "fromRebel",
+							"value": "fabio"
+						},
+						{
+							"key": "toRebel",
+							"value": "iuri"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trade items by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"gun\": 1\n    },\n    {\n        \"water\": 2\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rebels/tradeItemsById?fromRebel=1&toRebel=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rebels",
+						"tradeItemsById"
 					],
 					"query": [
 						{
@@ -172,7 +203,50 @@
 						},
 						{
 							"key": "toRebel",
-							"value": "3"
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trade items by name",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"gun\": 1\n    },\n    {\n        \"water\": 1\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rebels/tradeItemsByName?fromRebel=iuri&toRebel=iuri",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rebels",
+						"tradeItemsByName"
+					],
+					"query": [
+						{
+							"key": "fromRebel",
+							"value": "iuri"
+						},
+						{
+							"key": "toRebel",
+							"value": "iuri"
 						}
 					]
 				}
