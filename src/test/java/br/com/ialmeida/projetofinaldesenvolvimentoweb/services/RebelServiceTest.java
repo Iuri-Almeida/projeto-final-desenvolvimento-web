@@ -5,6 +5,7 @@ import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Localization;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.enums.Gender;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.RebelRepository;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.impl.RebelServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,11 +22,11 @@ class RebelServiceTest {
     @Autowired
     private RebelRepository rebelRepository;
 
-    private RebelService rebelService;
+    private RebelServiceImpl rebelService;
 
     @BeforeEach
     void init() {
-        rebelService = new RebelService(rebelRepository);
+        rebelService = new RebelServiceImpl(rebelRepository);
     }
 
     @Test
