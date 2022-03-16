@@ -145,10 +145,12 @@ $ git clone https://github.com/Iuri-Almeida/projeto-final-desenvolvimento-web.gi
 }
 ```
 
-* **[GET]** Report rebel - http://localhost:8080/api/rebels/reportTraitor?fromRebel=<from_id>&toRebel=<to_id>
+* **[GET]** Report rebel by id - http://localhost:8080/api/rebels/reportTraitorById?fromRebel=<from_id>&toRebel=<to_id>
 
+* **[GET]** Report rebel by name - http://localhost:8080/api/rebels/reportTraitorByName?fromRebel=<from_name>&toRebel=<to_name>
 
-* **[GET]** Trade items - http://localhost:8080/api/rebels/tradeItems?fromRebel=<from_id>&toRebel=<to_id>
+* **[GET]** Trade items by id - http://localhost:8080/api/rebels/tradeItemsById?fromRebel=<from_id>&toRebel=<to_id>
+* **[GET]** Trade items by name - http://localhost:8080/api/rebels/tradeItemsByName?fromRebel=<from_name>&toRebel=<to_name>
 ```json
 // List of Inventory object
 [
