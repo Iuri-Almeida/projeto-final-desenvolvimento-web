@@ -114,12 +114,12 @@ public class RebelService {
         return obj;
     }
 
-    public void reportRebelByName(String rebelName1, String rebelName2) {
-        reportRebel(findByName(rebelName1), findByName(rebelName2));
-    }
-
     public void reportRebelById(Long rebelId1, Long rebelId2) {
         reportRebel(findById(rebelId1), findById(rebelId2));
+    }
+
+    public void reportRebelByName(String rebelName1, String rebelName2) {
+        reportRebel(findByName(rebelName1), findByName(rebelName2));
     }
 
     private void reportRebel(Rebel fromRebel, Rebel toRebel) {
@@ -143,10 +143,15 @@ public class RebelService {
         rebelRepository.save(toRebel);
     }
 
-    public void tradeItems(Long rebelId1, Inventory items1, Long rebelId2, Inventory items2) {
-        Rebel rebel1 = findById(rebelId1);
-        Rebel rebel2 = findById(rebelId2);
+    public void tradeItemsById(Long rebelId1, Inventory items1, Long rebelId2, Inventory items2) {
+        tradeItems(findById(rebelId1), items1, findById(rebelId2), items2);
+    }
 
+    public void tradeItemsByName(String rebelName1, Inventory items1, String rebelName2, Inventory items2) {
+        tradeItems(findByName(rebelName1), items1, findByName(rebelName2), items2);
+    }
+
+    public void tradeItems(Rebel rebel1, Inventory items1, Rebel rebel2, Inventory items2) {
         validateTrade(rebel1, rebel2);
 
         // validate inventory

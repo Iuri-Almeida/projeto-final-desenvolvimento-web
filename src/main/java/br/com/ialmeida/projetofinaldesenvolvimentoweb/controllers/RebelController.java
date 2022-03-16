@@ -71,7 +71,7 @@ public class RebelController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/tradeItems")
+    @GetMapping(value = "/tradeItemsById")
     public ResponseEntity<Void> trade(
             @RequestParam(value = "fromRebel", defaultValue = "") Long fromRebelId,
             @RequestParam(value = "toRebel", defaultValue = "") Long toRebelId,
@@ -79,7 +79,19 @@ public class RebelController {
         if (items.size() < 2) {
             throw new StarWarsException("You must indicate two inventories to complete the trade.");
         }
-        rebelService.tradeItems(fromRebelId, items.get(0), toRebelId, items.get(1));
+        rebelService.tradeItemsById(fromRebelId, items.get(0), toRebelId, items.get(1));
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/tradeItemsByName")
+    public ResponseEntity<Void> trade(
+            @RequestParam(value = "fromRebel", defaultValue = "") String fromRebelName,
+            @RequestParam(value = "toRebel", defaultValue = "") String toRebelName,
+            @RequestBody List<Inventory> items) {
+        if (items.size() < 2) {
+            throw new StarWarsException("You must indicate two inventories to complete the trade.");
+        }
+        rebelService.tradeItemsByName(fromRebelName, items.get(0), toRebelName, items.get(1));
         return ResponseEntity.noContent().build();
     }
 
