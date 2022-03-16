@@ -2,6 +2,7 @@ package br.com.ialmeida.projetofinaldesenvolvimentoweb.services;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.InventoryRepository;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.impl.InventoryServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,11 +19,11 @@ class InventoryServiceTest {
     @Autowired
     private InventoryRepository inventoryRepository;
 
-    private InventoryService inventoryService;
+    private InventoryServiceImpl inventoryService;
 
     @BeforeEach
     public void init() {
-        inventoryService = new InventoryService(inventoryRepository);
+        inventoryService = new InventoryServiceImpl(inventoryRepository);
     }
 
     @Test

@@ -4,12 +4,10 @@ import br.com.ialmeida.projetofinaldesenvolvimentoweb.dtos.RebelDTO;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Inventory;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Localization;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Rebel;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 
-@Service
 public interface RebelService {
 
     List<Rebel> findAll();
