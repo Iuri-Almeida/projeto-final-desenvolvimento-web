@@ -38,9 +38,17 @@ public class RebelService {
     public Rebel updateRebelLocalization(Long id, Localization obj) {
         Rebel entity = findById(id);
 
-        entity.getLocalization().setLat(obj.getLat());
-        entity.getLocalization().setLon(obj.getLon());
-        entity.getLocalization().setGalaxyName(obj.getGalaxyName());
+        if (obj.getLat() != null) {
+            entity.getLocalization().setLat(obj.getLat());
+        }
+
+        if (obj.getLon() != null) {
+            entity.getLocalization().setLon(obj.getLon());
+        }
+
+        if (obj.getGalaxyName() != null) {
+            entity.getLocalization().setGalaxyName(obj.getGalaxyName());
+        }
 
         return rebelRepository.save(entity);
     }
