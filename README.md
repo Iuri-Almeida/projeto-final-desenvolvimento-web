@@ -108,13 +108,13 @@ $ git clone https://github.com/Iuri-Almeida/projeto-final-desenvolvimento-web.gi
 
 </p>
 
-* **[GET]** Get rebels - http://localhost:8080/api/rebels
+* **[GET]** Get rebels - **/api/rebels**
 
 
-* **[GET]** Get rebel by id - http://localhost:8080/api/rebels/<id>
+* **[GET]** Get rebel by id - **/api/rebels/{id}**
 
 
-* **[POST]** Insert rebel - http://localhost:8080/api/rebels
+* **[POST]** Insert rebel - **/api/rebels**
 ```json
 // Rebel object
 {
@@ -135,7 +135,7 @@ $ git clone https://github.com/Iuri-Almeida/projeto-final-desenvolvimento-web.gi
 }
 ```
 
-* **[PUT]** Update rebel localization - http://localhost:8080/api/localization/<id>
+* **[PUT]** Update rebel localization - **/api/localization/{id}**
 ```json
 // Localization object
 {
@@ -145,12 +145,12 @@ $ git clone https://github.com/Iuri-Almeida/projeto-final-desenvolvimento-web.gi
 }
 ```
 
-* **[GET]** Report rebel by id - http://localhost:8080/api/rebels/reportTraitorById?fromRebel=<from_id>&toRebel=<to_id>
+* **[GET]** Report rebel by id - **/api/rebels/reportTraitorById?fromRebel={from_id}&toRebel={to_id}**
+* **[GET]** Report rebel by name - **/api/rebels/reportTraitorByName?fromRebel={from_name}&toRebel={to_name}**
 
-* **[GET]** Report rebel by name - http://localhost:8080/api/rebels/reportTraitorByName?fromRebel=<from_name>&toRebel=<to_name>
 
-* **[GET]** Trade items by id - http://localhost:8080/api/rebels/tradeItemsById?fromRebel=<from_id>&toRebel=<to_id>
-* **[GET]** Trade items by name - http://localhost:8080/api/rebels/tradeItemsByName?fromRebel=<from_name>&toRebel=<to_name>
+* **[GET]** Trade items by id - **/api/rebels/tradeItemsById?fromRebel={from_id}&toRebel={to_id}**
+* **[GET]** Trade items by name - **/api/rebels/tradeItemsByName?fromRebel={from_name}&toRebel={to_name}**
 ```json
 // List of Inventory object
 [
@@ -171,7 +171,7 @@ $ git clone https://github.com/Iuri-Almeida/projeto-final-desenvolvimento-web.gi
 ]
 ```
 
-* **[GET]** API report - http://localhost:8080/api/report
+* **[GET]** API report - **/api/report**
 
 </div>
 
