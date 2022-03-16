@@ -2,6 +2,7 @@ package br.com.ialmeida.projetofinaldesenvolvimentoweb.services;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Localization;
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.LocalizationRepository;
+import br.com.ialmeida.projetofinaldesenvolvimentoweb.services.impl.LocalizationServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,11 +19,11 @@ class LocalizationServiceTest {
     @Autowired
     private LocalizationRepository localizationRepository;
 
-    private LocalizationService localizationService;
+    private LocalizationServiceImpl localizationService;
 
     @BeforeEach
     public void init() {
-        localizationService = new LocalizationService(localizationRepository);
+        localizationService = new LocalizationServiceImpl(localizationRepository);
     }
 
     @Test

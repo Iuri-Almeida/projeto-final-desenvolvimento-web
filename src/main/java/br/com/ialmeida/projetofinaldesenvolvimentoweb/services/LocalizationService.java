@@ -1,20 +1,9 @@
 package br.com.ialmeida.projetofinaldesenvolvimentoweb.services;
 
 import br.com.ialmeida.projetofinaldesenvolvimentoweb.entities.Localization;
-import br.com.ialmeida.projetofinaldesenvolvimentoweb.repositories.LocalizationRepository;
-import org.springframework.stereotype.Service;
 
-@Service
-public class LocalizationService {
+public interface LocalizationService {
 
-    private final LocalizationRepository localizationRepository;
-
-    public LocalizationService(LocalizationRepository localizationRepository) {
-        this.localizationRepository = localizationRepository;
-    }
-
-    public Localization insert(Localization localization) {
-        return localizationRepository.save(localization);
-    }
+    Localization insert(Localization localization);
 
 }
