@@ -1,0 +1,10 @@
+version: '3'
+services:
+  api:
+    image: rebels-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - h2
+  h2:
+    image: buildo/h2database
