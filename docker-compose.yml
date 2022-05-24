@@ -4,7 +4,36 @@ services:
     image: rebels-api
     ports:
       - "8080:8080"
+    networks:
+      - host
     depends_on:
       - h2
   h2:
     image: buildo/h2database
+    networks:
+      - host
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - /home/iuri/IdeaProjects/projeto-final-desenvolvimento-web:/etc/prometheus
+    networks:
+      - host
+    depends_on:
+      - api
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SERVER_PROTOCOL: http
+      GF_SERVER_HTTP_PORT: 3000
+    networks:
+      - host
+    depends_on:
+      - api
+
+networks:
+  host:
+    driver: bridge
